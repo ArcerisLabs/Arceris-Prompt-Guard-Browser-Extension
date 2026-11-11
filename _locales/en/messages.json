@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "Arceris Prompt Guard – AI Data Leak Protection"
+  },
+  "extShortName": {
+    "message": "Arceris Prompt Guard"
+  },
+  "extDesc": {
+    "message": "Detects and masks personal, health and card data before you send prompts to ChatGPT, Claude, Gemini and more. By arceris.ai"
+  }
+}

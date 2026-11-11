@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arceris | Prompt Guard</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18 7 3.12V11c0 4.52-2.98 8.69-7 9.93C7.98 19.69 5 15.52 5 11V6.3l7-3.12z"/></symbol>
+    <symbol id="i-hub" viewBox="0 0 24 24"><path d="M20 13H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zM7 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM20 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM7 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></symbol>
+    <symbol id="i-science" viewBox="0 0 24 24"><path d="M19.8 18.4 14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></symbol>
+    <symbol id="i-add" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
+    <symbol id="i-delete" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5-1-1h-5l-1 1H5v2h14V4h-3.5z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm9 14H6V10h12v10zm-6-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></symbol>
+    <symbol id="i-open" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></symbol>
+  </svg>
+
+  <aside class="sidebar">
+    <div class="brand"><span class="wordmark" lang="en">arceris</span></div>
+    <nav aria-label="Menü">
+      <div class="nav-group-title">Güvenlik</div>
+      <button class="nav-item" data-tab="rules"><svg class="ic"><use href="#i-shield"/></svg>PII Kuralları</button>
+      <div class="nav-group-title">Erişim</div>
+      <button class="nav-item" data-tab="providers"><svg class="ic"><use href="#i-hub"/></svg>Sağlayıcılar</button>
+      <div class="nav-group-title">Sistem</div>
+      <button class="nav-item" data-tab="general"><svg class="ic"><use href="#i-settings"/></svg>Ayarlar</button>
+      <div class="nav-group-title" lang="en">Arceris Platform</div>
+      <div id="featureNav"></div>
+    </nav>
+    <div class="side-foot">
+      <div class="row"><span>Prompt Guard</span><span class="badge badge-info" lang="en">Free</span></div>
+      <p class="muted">Tarama yalnızca bu tarayıcıda yapılır; hiçbir veri dışarı gönderilmez.</p>
+      <a class="side-link" data-site="sidebar" target="_blank" rel="noopener">arceris.ai<svg class="ic"><use href="#i-open"/></svg></a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <nav class="crumbs" aria-label="Konum"><span id="crumbGroup">Güvenlik</span><span class="sep">/</span><b id="crumbPage">PII Kuralları</b></nav>
+      <div class="right">
+        <span id="summary">Yükleniyor…</span>
+        <button class="icon-btn" id="themeToggle" title="Temayı değiştir" aria-label="Temayı değiştir"><svg class="ic"><use href="#i-moon"/></svg></button>
+        <label class="switch" title="Korumayı aç/kapat"><input type="checkbox" id="enabled"><span></span><b id="enabledLabel">Koruma açık</b></label>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- PII KURALLARI -->
+      <section id="view-rules">
+        <div class="page-header">
+          <div>
+            <p class="type-micro">Veri Koruma</p>
+            <h1 class="page-header-title">PII Kuralları</h1>
+            <p class="page-header-desc">AI sitelerine gönderilen promptlarda aranacak PII, PHI ve PCI desenlerini yönetin. Etkin kurallar, izlenen her sitede gönderim öncesinde çalışır.</p>
+          </div>
+          <button id="addRule" class="btn btn-primary"><svg class="ic"><use href="#i-add"/></svg>Kural Ekle</button>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" data-tab="rules" data-inner><svg class="ic"><use href="#i-shield"/></svg>Kurallar</button>
+          <button class="tab" role="tab" data-tab="test" data-inner><svg class="ic"><use href="#i-science"/></svg>Playground</button>
+        </div>
+
+        <div id="panel-rules">
+          <div class="banner"><svg class="ic"><use href="#i-info"/></svg><span>Desende 1. yakalama grubu varsa yalnızca o kısım hassas değer sayılır. Doğrulayıcılı kurallar (Luhn, TCKN, IBAN…) regex eşleşmesini ayrıca sağlama kontrolünden geçirir.</span></div>
+          <div class="card">
+            <div class="card-head">
+              <h2>PII Tespit Kuralları</h2>
+              <div class="tools">
+                <select id="catFilter" class="input-field" aria-label="Kategori">
+                  <option value="">Tüm kategoriler</option><option>PII</option><option>PHI</option><option>PCI</option><option value="CUSTOM">Özel</option>
+                </select>
+                <input type="search" id="q" class="input-field" placeholder="Ad, desen veya etiket ara" aria-label="Kural ara">
+              </div>
+            </div>
+            <div class="card-sub">
+              <span id="ruleCount" class="muted"></span><span class="grow"></span>
+              <button id="enableShown" class="btn btn-ghost btn-sm">Filtrelenenleri aç</button>
+              <button id="disableShown" class="btn btn-ghost btn-sm">Filtrelenenleri kapat</button>
+              <button id="exportRules" class="btn btn-ghost btn-sm">Dışa aktar</button>
+              <button id="importRules" class="btn btn-ghost btn-sm">İçe aktar</button>
+              <button id="resetRules" class="btn btn-ghost btn-sm">Varsayılanlara dön</button>
+              <input type="file" id="importFile" accept="application/json,.json" hidden>
+            </div>
+            <div class="table-scroll">
+              <table class="table-shell">
+                <thead><tr><th>Ad</th><th>Desen</th><th>Kategori</th><th>Önem</th><th>Durum</th><th class="num">İşlemler</th></tr></thead>
+                <tbody id="ruleList"></tbody>
+              </table>
+            </div>
+            <div class="pager">
+              <span id="pageInfo"></span>
+              <div><button id="prevPage" class="btn btn-secondary">Önceki</button><button id="nextPage" class="btn btn-secondary">Sonraki</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-test" hidden>
+          <div class="card section">
+            <h2>Playground</h2>
+            <p class="muted">Kurallarınızı örnek metin üzerinde deneyin. Metin yalnızca bu sayfada, tarayıcınızda taranır.</p>
+            <textarea id="testInput" class="input-field mono" rows="7" spellcheck="false" placeholder="Buraya örnek bir prompt yapıştırın…"></textarea>
+            <div class="pg-head"><button id="testSample" class="btn btn-secondary btn-sm">Örnek metin yükle</button><span id="testCount" class="muted"></span></div>
+            <p class="type-micro" style="margin:16px 0 8px">Bulgular</p>
+            <div id="testHighlight" class="highlight" aria-live="polite"></div>
+            <div id="testFindings"></div>
+            <p class="type-micro" style="margin:16px 0 8px">Maskelenmiş çıktı</p>
+            <pre id="testMasked" class="masked"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SAĞLAYICILAR -->
+      <section id="view-providers" hidden>
+        <div class="page-header"><div>
+          <p class="type-micro">Kapsam</p>
+          <h1 class="page-header-title">Sağlayıcılar</h1>
+          <p class="page-header-desc">Prompt Guard'ın izlediği AI siteleri. Kapalı olan sitelerde tarama yapılmaz.</p>
+        </div></div>
+        <div class="card section">
+          <h2>Yerleşik sağlayıcılar</h2>
+          <p class="muted">Bilinen AI sohbet siteleri.</p>
+          <div id="providerList" class="grid"></div>
+        </div>
+        <div class="card section">
+          <h2>Özel alan adları</h2>
+          <p class="muted">Listede olmayan bir AI sitesini (ör. şirket içi sohbet aracı) ekleyin. Tarayıcı o site için erişim izni isteyecektir.</p>
+          <form id="domainForm" class="inline-form">
+            <input type="text" id="domainInput" class="input-field" placeholder="ornek-ai.com" aria-label="Alan adı" autocomplete="off">
+            <button class="btn btn-primary" type="submit">Ekle</button>
+          </form>
+          <div id="domainList" class="chips"></div>
+        </div>
+      </section>
+
+      <!-- AYARLAR -->
+      <section id="view-general" hidden>
+        <div class="page-header"><div>
+          <p class="type-micro">Yapılandırma</p>
+          <h1 class="page-header-title">Ayarlar</h1>
+          <p class="page-header-desc">Tespit edildiğinde ne olacağını, maskeleme biçimini ve hassasiyeti belirleyin. Değişiklikler anında kaydedilir.</p>
+        </div></div>
+
+        <div class="card section">
+          <h2>Tespit edildiğinde</h2>
+          <p class="muted">Hassas veri içeren bir mesaj gönderilmek istendiğinde uygulanacak eylem.</p>
+          <div class="radios" id="modeGroup">
+            <label><input type="radio" name="mode" value="warn"><span><b>Uyar</b> — gönderimi durdur; maskele, düzenle veya yine de gönder.</span></label>
+            <label><input type="radio" name="mode" value="block"><span><b>Engelle</b> — hassas veri kaldırılmadan gönderime izin verme.</span></label>
+            <label><input type="radio" name="mode" value="monitor"><span><b>Yalnızca izle</b> — gönderimi durdurma, sadece rozet göster.</span></label>
+          </div>
+        </div>
+
+        <div class="card section">
+          <h2>Maskeleme biçimi</h2>
+          <p class="muted">“Maskele” seçildiğinde hassas değerin neyle değiştirileceği.</p>
+          <div class="radios">
+            <label><input type="radio" name="maskStyle" value="scramble"><span><b>Ortayı rastgele değiştir</b> — baş ve son korunur, aradaki rakam/harfler rastgele değişir. Örn. <code>37•••••632</code> → <code>37418905632</code></span></label>
+            <label><input type="radio" name="maskStyle" value="label"><span><b>Etiket yaz</b> — değerin yerine <code>[TCKN]</code>, <code>[KART_NO]</code> gibi etiket konur.</span></label>
+          </div>
+          <div class="cols keep">
+            <label class="field"><span class="field-label">Baştan korunacak karakter</span><input type="number" id="keepStart" class="input-field" min="0" max="10"></label>
+            <label class="field"><span class="field-label">Sondan korunacak karakter</span><input type="number" id="keepEnd" class="input-field" min="0" max="10"></label>
+          </div>
+          <label class="check"><input type="checkbox" id="restoreResponses"> <span><b>Cevaplarda orijinal değeri geri göster</b> — sayfada rastgele değer görünürse (cevapta ve kendi mesajınızda) yerine orijinali yazılır ve altı noktalı çizilir. Eşleme yalnızca o sekmenin belleğinde tutulur; diske kaydedilmez, sayfa yenilenince silinir. Yalnızca “Ortayı rastgele değiştir” biçiminde ve en az 6 karakterlik değerlerde çalışır.</span></label>
+        </div>
+
+        <div class="card section">
+          <h2>Hassasiyet</h2>
+          <p class="muted">Hangi önem düzeyindeki kuralların çalışacağı.</p>
+          <label class="field narrow"><span class="field-label">En düşük önem düzeyi</span>
+            <select id="minSeverity" class="input-field">
+              <option value="low">Düşük ve üzeri (hepsi)</option>
+              <option value="medium">Orta ve üzeri</option>
+              <option value="high">Yalnızca yüksek</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="liveBadge"> <span>Yazarken canlı rozet göster (sağ altta “N hassas veri”)</span></label>
+        </div>
+
+        <div class="card section">
+          <h2>İzin listesi</h2>
+          <p class="muted">Buradaki değerler hiçbir zaman hassas sayılmaz. Satır başına bir değer (ör. şirketin genel e-postası).</p>
+          <textarea id="allowlist" class="input-field mono" rows="5" spellcheck="false" placeholder="destek@sirketim.com&#10;127.0.0.1"></textarea>
+        </div>
+
+        <div class="card section">
+          <h2>Ek “gönder” butonu seçicileri</h2>
+          <p class="muted">Bir sitede gönder butonuna tıklama yakalanmıyorsa, butonun CSS seçicisini ekleyin. Satır başına bir seçici.</p>
+          <textarea id="extraSendSelectors" class="input-field mono" rows="3" spellcheck="false" placeholder="button.my-send-btn&#10;[data-action=&quot;send&quot;]"></textarea>
+        </div>
+
+        <div class="card section">
+          <h2>İstatistik</h2>
+          <p class="muted">Yalnızca sayaç tutulur; tespit edilen veriler hiçbir yere kaydedilmez veya gönderilmez.</p>
+          <div class="stats" id="stats"></div>
+          <button id="resetStats" class="btn btn-secondary btn-sm">Sayaçları sıfırla</button>
+          <p class="muted upsell">Ekip genelinde raporlama ve denetim kayıtları <a data-site="stats" target="_blank" rel="noopener">Arceris platformunda</a>.</p>
+        </div>
+      </section>
+
+      <!-- ARCERIS PLATFORM (tanıtım) -->
+      <section id="view-feature" hidden>
+        <div class="page-header">
+          <div>
+            <p class="type-micro" lang="en">Arceris Platform</p>
+            <h1 class="page-header-title"><span id="fTitle"></span> <span class="badge badge-info" lang="en">Enterprise</span></h1>
+            <p class="page-header-desc" id="fDesc"></p>
+          </div>
+          <a id="fCta" class="btn btn-primary" target="_blank" rel="noopener">Arceris ile iletişime geçin<svg class="ic"><use href="#i-open"/></svg></a>
+        </div>
+        <div class="banner"><svg class="ic"><use href="#i-lock"/></svg><span>Bu özellik ücretsiz tarayıcı eklentisinde yer almaz. Arceris platformunun parçasıdır; eklentide bir şey açılmaz, platform ayrıca kurulur.</span></div>
+        <div class="card section">
+          <h2>Neler sağlar</h2>
+          <ul id="fList" class="flist"></ul>
+        </div>
+        <div class="card section">
+          <h2>Eklenti ile farkı</h2>
+          <p class="muted" id="fGap" style="margin:0"></p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- KURAL DÜZENLEYİCİ -->
+  <dialog id="ruleDialog">
+    <form method="dialog" id="ruleForm">
+      <div class="d-head"><h2 id="ruleDialogTitle">Kuralı düzenle</h2></div>
+      <div class="d-body">
+        <div class="cols">
+          <label class="field"><span class="field-label">Ad</span><input type="text" id="rName" class="input-field" required></label>
+          <label class="field"><span class="field-label">Maske etiketi</span><input type="text" id="rLabel" class="input-field" placeholder="ör. MUSTERI_NO" pattern="[A-Za-z0-9_ĞÜŞİÖÇğüşıöç\-]+"></label>
+        </div>
+        <div class="cols three">
+          <label class="field"><span class="field-label">Kategori</span>
+            <select id="rCategory" class="input-field"><option>PII</option><option>PHI</option><option>PCI</option><option value="CUSTOM">Özel</option></select>
+          </label>
+          <label class="field"><span class="field-label">Önem</span>
+            <select id="rSeverity" class="input-field"><option value="low">Düşük</option><option value="medium">Orta</option><option value="high">Yüksek</option></select>
+          </label>
+          <label class="field"><span class="field-label">Doğrulayıcı</span><select id="rValidator" class="input-field"></select></label>
+        </div>
+        <label class="field"><span class="field-label">Regex deseni</span>
+          <textarea id="rPattern" class="input-field mono" rows="4" spellcheck="false" required></textarea>
+        </label>
+        <p class="hint">1. yakalama grubu <code>( … )</code> varsa yalnızca o kısım hassas değer sayılır ve maskelenir. <code>g</code> bayrağı otomatik eklenir.</p>
+        <div class="cols">
+          <fieldset class="flags"><legend>Bayraklar</legend>
+            <label><input type="checkbox" data-flag="i"> i <small>büyük/küçük harf</small></label>
+            <label><input type="checkbox" data-flag="m"> m <small>çok satır</small></label>
+            <label><input type="checkbox" data-flag="s"> s <small>. yeni satır</small></label>
+            <label><input type="checkbox" data-flag="u"> u <small>Unicode</small></label>
+          </fieldset>
+          <label class="field"><span class="field-label">Açıklama</span><input type="text" id="rDesc" class="input-field"></label>
+        </div>
+        <label class="field"><span class="field-label">Deneme metni</span>
+          <textarea id="rSample" class="input-field mono" rows="2" spellcheck="false" placeholder="Deseni denemek için örnek yazın…"></textarea>
+        </label>
+        <div id="rResult" class="result" aria-live="polite"></div>
+      </div>
+      <div class="d-foot">
+        <button type="button" id="rRestore" class="btn btn-ghost">Yerleşik haline döndür</button>
+        <span class="grow"></span>
+        <button type="button" id="rCancel" class="btn btn-secondary">Vazgeç</button>
+        <button type="submit" class="btn btn-primary" id="rSave">Kaydet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="engine.js"></script>
+  <script src="rules.js"></script>
+  <script src="storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

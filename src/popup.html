@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Arceris Prompt Guard</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    body { width: 320px; background: var(--color-surface-container-lowest); }
+    header { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; background: var(--color-surface-container-low); border-bottom: 1px solid var(--color-outline); }
+    header .wordmark { font-size: 22px; }
+    header .grow { flex: 1; }
+    .body { padding: 14px 16px 16px; }
+    .site { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--color-outline); border-radius: var(--radius-lg); padding: 12px; margin-bottom: 12px; background: var(--color-surface-container-low); }
+    .site b { display: block; font-size: 13px; font-weight: 600; }
+    .site span { color: var(--color-on-surface-variant); font-size: 12px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-on-surface-dim); margin-top: 6px; flex: none; }
+    .site.on .dot { background: var(--color-success); box-shadow: 0 0 0 3px var(--color-success-container); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .stat { border: 1px solid var(--color-outline); border-radius: var(--radius-md); padding: 8px 10px; }
+    .stat b { display: block; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat span { letter-spacing: .05em; text-transform: uppercase; color: var(--color-on-surface-variant); font-size: 9.5px; font-weight: 600; }
+    .btn { width: 100%; }
+    .foot { margin: 10px 0 0; text-align: center; font-size: 12px; color: var(--color-on-surface-variant); }
+    .foot a { color: var(--color-primary); font-weight: 500; text-decoration: none; }
+    .foot a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="wordmark" lang="en">arceris</span>
+    <span class="chip">Prompt Guard</span>
+    <span class="grow"></span>
+    <label class="switch" title="Korumayı aç/kapat"><input type="checkbox" id="enabled" aria-label="Koruma"><span></span></label>
+  </header>
+  <div class="body">
+    <div class="site" id="site"><i class="dot"></i><div><b id="siteTitle">…</b><span id="siteSub"></span></div></div>
+    <div class="stats">
+      <div class="stat"><b id="sDetected">0</b><span>Tespit</span></div>
+      <div class="stat"><b id="sMasked">0</b><span>Maskelenen</span></div>
+      <div class="stat"><b id="sBypassed">0</b><span>Gönderilen</span></div>
+    </div>
+    <button id="openOptions" class="btn btn-primary">Kurallar ve ayarlar</button>
+    <p class="foot">Ekipler için: <a href="https://arceris.ai/?utm_source=prompt-guard&amp;utm_medium=browser-extension&amp;utm_campaign=popup" target="_blank" rel="noopener">arceris.ai</a></p>
+  </div>
+  <script src="engine.js"></script>
+  <script src="rules.js"></script>
+  <script src="storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "Arceris Prompt Guard – AI Veri Sızıntısı Koruması"
+  },
+  "extShortName": {
+    "message": "Arceris Prompt Guard"
+  },
+  "extDesc": {
+    "message": "ChatGPT, Claude, Gemini gibi AI araçlarına gönderdiğiniz promptlarda kişisel, sağlık ve kart verilerini bulur, maskeler. arceris.ai"
+  }
+}
